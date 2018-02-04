@@ -13,7 +13,7 @@ var options = {
   // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0
 };
-// var connection = mongoose.connect('mongodb://parking-backend:m0ng0p4rk1ng@ds117758.mlab.com:17758/parking',options);
+var connection = mongoose.connect('mongodb://localhost:27017/exonfc',options);
 
 var jwt = require('express-jwt');
 

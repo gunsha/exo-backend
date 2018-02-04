@@ -12,4 +12,4 @@ var tachaSchema = new Schema({
 });
 
 tachaSchema.index({_geolocation: '2dsphere'});
-module.exports = mongoose.model('Parkings', tachaSchema);
+module.exports = mongoose.model('Tachas', tachaSchema);
