@@ -42,9 +42,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-app.use(jwt({ secret: tokenSecret}));
+app.use(jwt({ secret: tokenSecret}).unless({path: ['/users/login']}));
 app.use('/users', users);
-app.use('/parkings', tachas);
+app.use('/tachas', tachas);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
