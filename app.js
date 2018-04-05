@@ -18,13 +18,13 @@ var jwt = require('express-jwt');
 
 var users = require('./routes/user');
 var tachas = require('./routes/tacha');
-var logger = require('./routes/logger');
+var logs = require('./routes/logger');
 
 var app = express();
 
 var tokenSecret = '3x05m4rt94rk1n6-24725dac549b5d04dd9559f737b8c71daf815b3a033c4b9bd37c18cf20a15b54';
 
-//app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 app.use(jwt({ secret: tokenSecret}).unless({path: ['/users/login']}));
 app.use('/users', users);
 app.use('/tachas', tachas);
-app.use('/logger', logger);
+app.use('/logs', logs);
 
 
 // catch 404 and forward to error handler
