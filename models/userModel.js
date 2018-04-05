@@ -7,7 +7,7 @@ var beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 var Pbkdf2 = require('nodejs-pbkdf2');
 var jwt = require('jsonwebtoken');
-var tokenSecret = 'shhhhhhared-secret';
+var tokenSecret = '3x05m4rt94rk1n6-24725dac549b5d04dd9559f737b8c71daf815b3a033c4b9bd37c18cf20a15b54';
 
 var config = {
   digestAlgorithm: 'sha1',
@@ -20,9 +20,10 @@ var pbkdf2 = new Pbkdf2(config);
 
 var UsuarioSchema = new Schema({
 	'email' : { type: String, required: [true,'El email es obligatorio.'], unique: 'El email ya se encuentra registrado.' },
-	'token' : { type: String},
+    'token' : { type: String},
+    'nombre' : { type: String},
+    'apellido' : { type: String},
 	'fechaLogin' : { type: Date},
-	'fechaLogout' : { type: Date},
 	'password' : { type: String, required: [true,'El password es obligatorio.'] },
 	'fechaAlta' : { type: Date},
     'activo' : { type: Number},
@@ -37,6 +38,8 @@ UsuarioSchema.pre('save', function(next) {
     if (!usuario.isModified('password')) 
         return next();
 
+    usuario.fechaAlta = new Date();
+    
     pbkdf2.hashPassword(usuario.password, function(err, cipherText, salt) {
         usuario.password = cipherText;
         usuario.salt = salt;

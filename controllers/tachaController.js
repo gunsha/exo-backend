@@ -1,4 +1,5 @@
 var TachaModel = require('../models/tachaModel.js');
+var logger = require('../controllers/loggerController.js');
 
 module.exports = {
 
@@ -33,7 +34,8 @@ module.exports = {
     },
     create: function (req, res) {
         var tacha = new TachaModel(req.body);
-
+        tacha.dt_created = new Date();
+        tacha._geolocation.coordinates = [0,0];
         tacha.save(function (err, tacha) {
             if (err) {
                 return res.status(500).json({
@@ -41,6 +43,7 @@ module.exports = {
                     error: err
                 });
             }
+            logger.create(req.user,tacha,'CREACION DE TACHA');
             return res.status(201).json(tacha);
         });
     },

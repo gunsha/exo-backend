@@ -7,10 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var options = {
   useMongoClient: true,
-  reconnectTries: 100, // Never stop trying to reconnect
-  reconnectInterval: 500, // Reconnect every 500ms
+  reconnectTries: 100,
+  reconnectInterval: 500,
   poolSize: 10, 
-  // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0
 };
 var connection = mongoose.connect('mongodb://localhost:27017/exonfc',options);
@@ -19,10 +18,16 @@ var jwt = require('express-jwt');
 
 var users = require('./routes/user');
 var tachas = require('./routes/tacha');
+var logger = require('./routes/logger');
 
 var app = express();
 
-var tokenSecret = 'shhhhhhared-secret';
+var tokenSecret = '3x05m4rt94rk1n6-24725dac549b5d04dd9559f737b8c71daf815b3a033c4b9bd37c18cf20a15b54';
+
+//app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -36,15 +41,12 @@ app.use(function(req, res, next) {
       }
   });
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-
 app.use(jwt({ secret: tokenSecret}).unless({path: ['/users/login']}));
 app.use('/users', users);
 app.use('/tachas', tachas);
+app.use('/logger', logger);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -63,9 +65,8 @@ if (app.get('env') === 'development') {
         error: err
       });
     });
-  }
-  
-  // production error handler
+  } else{
+    // production error handler
   // no stacktraces leaked to user
   app.use(function(err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
@@ -78,6 +79,9 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+  }
+  
+  
   
   
   module.exports = app;

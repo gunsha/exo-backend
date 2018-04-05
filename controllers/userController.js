@@ -34,7 +34,7 @@ module.exports = {
 
     create: function (req, res) {
         var User = new UserModel(req.body);
-
+        
         User.save(function (err, user) {
             if (err) {
                 return res.status(500).json({
