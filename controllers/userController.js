@@ -42,50 +42,56 @@ module.exports = {
                     error: err
                 });
             }
+            logger.create(req.user,null,'CREACION DE USUARIO '+ user.nombre +' '+ user.apellido);
             return res.status(201).json(user);
         });
     },
 
     update: function (req, res) {
         var id = req.params.id;
-        UserModel.findOne({_id: id}, function (err, Admin) {
+        UserModel.findOne({_id: id}, function (err, User) {
             if (err) {
                 return res.status(500).json({
-                    message: 'Error when getting Admin',
+                    message: 'Error when getting User',
                     error: err
                 });
             }
-            if (!Admin) {
+            if (!User) {
                 return res.status(404).json({
-                    message: 'No such Admin'
+                    message: 'No such User'
                 });
             }
 
-			Admin.id_usuario = req.body.id_usuario ? req.body.id_usuario : Admin.id_usuario;
-			Admin.id_persona_fisica = req.body.id_persona_fisica ? req.body.id_persona_fisica : Admin.id_persona_fisica;
+			User.id_usuario = req.body.id_usuario ? req.body.id_usuario : User.id_usuario;
+			User.email = req.body.email ? req.body.email : User.email
+            User.nombre = req.body.nombre ? req.body.nombre : User.nombre
+            User.apellido = req.body.apellido ? req.body.apellido : User.apellido
+            User.activo = req.body.activo ? req.body.activo : User.activo
+            User.rol = req.body.rol ? req.body.rol : User.rol
 			
-            Admin.save(function (err, Admin) {
+            User.save(function (err, User) {
                 if (err) {
                     return res.status(500).json({
-                        message: 'Error when updating Admin.',
+                        message: 'Error when updating User.',
                         error: err
                     });
                 }
-
-                return res.json(Admin);
+                logger.create(req.user,null,'MODIFICACION DE USUARIO '+ User.nombre +' '+ User.apellido);
+                return res.json(User);
             });
         });
     },
 
     remove: function (req, res) {
         var id = req.params.id;
-        UserModel.findByIdAndRemove(id, function (err, Admin) {
+        UserModel.findByIdAndRemove(id, function (err, User) {
             if (err) {
                 return res.status(500).json({
-                    message: 'Error when deleting the Admin.',
+                    message: 'Error when deleting the User.',
                     error: err
                 });
             }
+            logger.create(req.user,null,'ELIMINACION DE USUARIO '+ User.nombre +' '+ User.apellido);
             return res.status(204).json();
         });
     },
