@@ -1,0 +1,23 @@
+<div class="circle-container" id="{{::$ctrl.uniqueId}}">
+	<div class="circle">
+		<svg width="200" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" style="position: absolute;">
+			<g transform="translate(110,110)">
+				<g transform="rotate(-90)">
+					<circle r="80" class="seconds-circle"/>
+					<g id="e-pointer">
+						<circle cx="80" cy="0" r="8" class="e-c-pointer"/>
+					</g>
+				</g>
+			</g>
+		</svg>
+		<svg width="200" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+			<g transform="translate(110,110)">
+				<circle r="95" class="e-c-base"/>
+				<g transform="rotate(-90)">
+					<circle r="95" class="e-c-progress main"/>
+				</g>
+			</g>
+		</svg>
+		<h5 class="card-title"><span class="time-left" countdown-text date="{{$ctrl.end}}">&nbsp;</span></h5>
+	</div>
+</div>

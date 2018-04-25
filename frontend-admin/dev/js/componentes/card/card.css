@@ -1,0 +1,32 @@
+card {
+	color:black;
+}
+card .img{
+	height: 220px; 
+	width: 100%; display: block;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+    background-position: center;
+    background-color: lightgray;
+}
+
+card:not(.main) .card{
+	height: 450px;
+}
+card.fin .card{
+	height: 410px;
+	cursor: pointer;
+}
+card.fin .card:hover{
+	box-shadow: 0px 3px 30px 0px rgba(0,0,0,0.5);
+}
+@media (min-width: 769px){
+	card.main .card .img{
+		width: 70% !important;
+		max-width: 650px;
+		height: 410px !important;
+	}
+	card.main .card{
+		flex-direction: row;
+	}
+}

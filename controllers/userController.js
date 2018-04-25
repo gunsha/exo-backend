@@ -1,5 +1,5 @@
 var UserModel = require('../models/userModel.js');
-
+var logger = require('../controllers/loggerController.js');
 module.exports = {
 
     list: function (req, res) {
@@ -102,7 +102,7 @@ module.exports = {
         var rpassword = req.body.password;
         UserModel.findOne({
             email: email
-        }, function(err, usuario) {
+        }).deepPopulate(['rol']).exec(function(err, usuario) {
             if (err) {
                 return res.status(406).json({
                     message: 'Error al loguear el usuario.',

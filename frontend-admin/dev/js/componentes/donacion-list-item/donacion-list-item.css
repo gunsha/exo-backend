@@ -1,0 +1,26 @@
+donacion-list-item li {
+    height: 45px;
+    padding: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+donacion-list-item li div{
+    line-height: 35px;
+}
+donacion-list-item li svg{
+    margin: 5px;
+}
+donacion-list-item .user-data{
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+donacion-list-item .donacion{
+    float: right;
+    margin-left: 5px; 
+}
+donacion-list-item .avatar{
+    margin-right: 5px;
+    float: left;
+}

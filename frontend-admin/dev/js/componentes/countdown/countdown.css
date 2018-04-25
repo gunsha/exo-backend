@@ -1,0 +1,47 @@
+countdown {
+
+}
+
+countdown .e-c-base {
+  fill: none;
+  stroke: #B6B6B6;
+  stroke-width: 4px
+}
+
+countdown .e-c-progress {
+  fill: none;
+  stroke: #F7958E;
+  stroke-width: 4px;
+  transition: stroke-dashoffset 0.7s;
+}
+
+countdown .seconds-circle{
+	fill: none;
+  stroke: #F7958E;
+  stroke-width: 1px;
+}
+
+countdown .e-c-pointer {
+  fill: #F7958E;
+  stroke: #F7958E;
+  stroke-width: 1px;
+}
+
+countdown #e-pointer { transition: transform 0.7s; }
+countdown .circle-container{
+	    position: relative;
+    /*top: 30px;*/
+    width: 100%;
+    margin: 0 auto;
+}
+countdown .time-left{
+	position: absolute;
+    left: calc( 50% - 75px);
+    top: 80px;
+    text-align: center;
+    font-size: 25px;
+    width: 150px;
+}
+countdown .seconds {
+	font-size: 20px;
+}

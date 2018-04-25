@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var UserController = require('../controllers/userController.js');
+var RolController = require('../controllers/rolController.js');
 
 /*
  * GET
@@ -21,6 +22,12 @@ router.get('/:id', function (req, res) {
  */
 router.post('/', function (req, res) {
     UserController.create(req, res);
+});
+/*
+ * POST
+ */
+router.post('/rol/', function (req, res) {
+    RolController.create(req, res);
 });
 /*
  * POST

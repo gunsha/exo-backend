@@ -8,6 +8,7 @@ var beautifyUnique = require('mongoose-beautiful-unique-validation');
 var Pbkdf2 = require('nodejs-pbkdf2');
 var jwt = require('jsonwebtoken');
 var tokenSecret = '3x05m4rt94rk1n6-24725dac549b5d04dd9559f737b8c71daf815b3a033c4b9bd37c18cf20a15b54';
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var config = {
   digestAlgorithm: 'sha1',
@@ -27,7 +28,10 @@ var UsuarioSchema = new Schema({
 	'password' : { type: String, required: [true,'El password es obligatorio.'] },
 	'fechaAlta' : { type: Date},
     'activo' : { type: Number},
-    'rol' : { type: Number},
+    'rol' : {
+        type: Schema.Types.ObjectId,
+        ref: 'Roles'
+    },
     'salt' : { type: String}
 });
 
@@ -57,5 +61,5 @@ UsuarioSchema.methods.comparePassword = function(candidatePassword,password, sal
 UsuarioSchema.methods.getToken = function(cb){
     cb(jwt.sign({ user: this }, tokenSecret));
 };
-
+UsuarioSchema.plugin(deepPopulate);
 module.exports = mongoose.model('Usuario', UsuarioSchema);

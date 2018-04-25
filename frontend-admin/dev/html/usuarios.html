@@ -1,0 +1,115 @@
+<section class="" style="padding-top: 90px">
+	<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="title">Listado de usuarios registrados</h4>
+                                <p class="category">
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-sm btn-default btn-fill" ng-click="ctrl.openModal()">
+                                    <span class="btn-label">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+                                    nuevo
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <form role="search">
+                                    <div class="input-group border-input">
+                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                        <input type="text" value="" class="form-control border-input" placeholder="Filtrar..." ng-model="ctrl.filterText" ng-change="ctrl.filtrarTabla()">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content table-responsive" ng-if="ctrl.list.length != 0">
+                        <table class="table dataTable table-hover" at-table at-paginated at-list="ctrl.list" at-config="ctrl.tableConfig">
+                            <thead>
+                                <th at-attribute="email">Email</th>
+                                <th at-attribute="nombre">Nombre</th>
+                                <th at-attribute="apellido">Apellido</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td at-implicit at-sortable at-attribute="email"></td>
+                                    <td at-implicit at-sortable at-attribute="nombre"></td>
+                                    <td at-implicit at-sortable at-attribute="apellido"></td>
+                                    <td class="td-actions text-center">
+                                        <button type="button" rel="tooltip" data-toggle="tooltip" class="btn btn-success btn-round" data-original-title="" title="Editar" ng-click="ctrl.edit(item)">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <button type="button" rel="tooltip" data-toggle="tooltip" class="btn btn-danger btn-round" data-original-title="" title="Eliminar" ng-click="ctrl.remove(item)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <at-pagination class="pagination" at-list="ctrl.list" at-config="ctrl.tableConfig"></at-pagination>
+                    </div>
+                    <div class="row" ng-if="ctrl.list.length == 0">
+                        <div class="text-center">
+                            No se encontraron resultados
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="newUser" tabindex="-1" role="dialog" aria-labelledby="newUserLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="newUserLabel" ng-if="!ctrl.isEdit">Nuevo Usuario</h4>
+                <h4 class="modal-title" id="newUserLabel" ng-if="ctrl.isEdit">Editar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                                       <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="InputEmail1">Email</label>
+                                    <input type="email" class="form-control border-input" required placeholder="Email" ng-model="ctrl.new.email">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="InputContraseña1">Contraseña</label>
+                                    <input type="text" class="form-control border-input" required placeholder="Contraseña" ng-model="ctrl.new.password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control border-input" required placeholder="Nombre" ng-model="ctrl.new.nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Apellido</label>
+                                    <input type="text" class="form-control border-input" required placeholder="Apellido" ng-model="ctrl.new.apellido">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.save()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>

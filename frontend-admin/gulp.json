@@ -1,0 +1,32 @@
+{
+    "secciones": [
+        "index",
+        "nav",
+        "login",
+        "usuarios"
+    ],
+    "core": [
+        "main",
+        "app",
+        "states"
+    ],
+    "libs": [
+        "jquery/dist/jquery.min",
+        "bootstrap/dist/js/bootstrap.min",
+        "angular/angular.min",
+        "moment/min/moment.min",
+        "angular-ui-router/release/angular-ui-router.min",
+        "angular-jwt/dist/angular-jwt.min",
+        "angular-growl-v2/build/angular-growl.min",
+        "angular-table",
+        "sweetalert2/dist/sweetalert2.min"
+    ],
+    "css": [
+        "lib/angular-growl-v2/build/angular-growl.min",
+        "lib/sweetalert2/dist/sweetalert2.min",
+        "lib/bootstrap/dist/css/bootstrap.min",
+        "lib/font-awesome.min",
+        "css/app"
+    ],
+    "components": []
+}

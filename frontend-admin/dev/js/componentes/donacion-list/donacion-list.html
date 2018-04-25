@@ -1,0 +1,6 @@
+<h3 class="title">{{::$ctrl.title}}</h3>
+<div style="overflow:hidden;" ng-style="{height:45*$ctrl.size+'px'}" scroll-glue>
+    <ul>
+        <donacion-list-item ng-repeat="item in $ctrl.data track by $index" donacion="item"></donacion-list-item>
+    </ul>
+</div>
